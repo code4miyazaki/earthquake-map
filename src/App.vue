@@ -65,38 +65,38 @@ export default {
      */
     dmm2deg: function(str) {
       // console.log(str)
-      let tmp = str.split("°");
-      const d = Number(tmp[0]);
+      let tmp = str.split("°")
+      const d = Number(tmp[0])
 
-      tmp = tmp[1].split(".");
-      const m = Number(tmp[0]);
+      tmp = tmp[1].split(".")
+      const m = Number(tmp[0])
 
-      tmp = tmp[1].split("'");
-      const s = Number(tmp[0]);
+      tmp = tmp[1].split("'")
+      const s = Number(tmp[0])
 
       return d + (m * 60 + s) / 3600
     },
     circleSize: function(mag) {
-      let size = 8;
+      let size = 8
       if (mag < 3) {
-        size = 2;
+        size = 2
       } else if (mag < 5) {
-        size = 4;
+        size = 4
       } else if (mag < 7) {
-        size = 6;
+        size = 6
       }
-      return size;
+      return size
     },
     depthColor: function(depth) {
-      let color = "blue";
+      let color = "blue"
       if (depth < 30) {
-        color = "red";
+        color = "red"
       } else if (depth < 100) {
-        color = "orange";
+        color = "orange"
       } else if (depth < 300) {
-        color = "yellow";
+        color = "yellow"
       }
-      return color;
+      return color
     }
   }
 }
