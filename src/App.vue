@@ -1,7 +1,7 @@
 <template>
   <div class="app">
     <EarthquakeJapanMap></EarthquakeJapanMap>
-    <p>気象庁「2018年05月20日の震源リスト」 （https://www.data.jma.go.jp/svd/eqev/data/daily_map/20190517.html）を加工して作成</p>
+    <p>気象庁「2018年05月20日の震源リスト」 （https://www.data.jma.go.jp/svd/eqev/data/daily_map/20180520.html）を加工して作成</p>
   </div>
 </template>
 

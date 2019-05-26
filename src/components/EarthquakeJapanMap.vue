@@ -147,10 +147,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-#chartdiv {
-  width: 100%;
-  height: 600px;
-}
-</style>
