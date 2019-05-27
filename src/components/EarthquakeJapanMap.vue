@@ -1,5 +1,8 @@
 <template>
-  <div id='chartdiv'></div>
+  <div>
+    <div id='chartdiv'></div>
+    <p>気象庁「2018年05月20日の震源リスト」 （https://www.data.jma.go.jp/svd/eqev/data/daily_map/20180520.html）を加工して作成</p>
+  </div>
 </template>
 
 <script>
