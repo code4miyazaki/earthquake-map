@@ -1,21 +1,26 @@
 <template>
   <div class="app">
-    <EarthquakeJapanMap></EarthquakeJapanMap>
-    <p>気象庁「2018年05月20日の震源リスト」 （https://www.data.jma.go.jp/svd/eqev/data/daily_map/20180520.html）を加工して作成</p>
+    <router-view/>
+    <!-- <EarthquakeJapanMap></EarthquakeJapanMap> -->
   </div>
 </template>
 
 <script>
-import EarthquakeJapanMap from './components/EarthquakeJapanMap'
-
 export default {
-  components: {
-    EarthquakeJapanMap,
-  },
+  name: 'App'
 }
 </script>
 
-<style scoped>
+<style>
+#app {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
+}
+
 #chartdiv {
   width: 100%;
   height: 600px;
