@@ -2,7 +2,7 @@
   <aside class="menu">
     <p class="menu-label">気象庁</p>
     <ul class="menu-list">
-      <li><router-link to="/">2018年5月20日の震源データ</router-link></li>
+      <li><router-link to="/">2018/5/20の震源データ</router-link></li>
     </ul>
     <p class="menu-label">USGS</p>
     <ul class="menu-list">
