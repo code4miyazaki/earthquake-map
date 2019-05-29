@@ -1,13 +1,16 @@
 <template>
-  <div class="app">
-    <router-view/>
-    <!-- <EarthquakeJapanMap></EarthquakeJapanMap> -->
+  <div id="app" class="columns">
+    <Menu class="column is-one-quarter"></Menu>
+    <router-view class="column"></router-view>
   </div>
 </template>
 
 <script>
+import Menu from '@/components/Menu'
+
 export default {
-  name: 'App'
+  name: 'App',
+  components: { Menu }
 }
 </script>
 
