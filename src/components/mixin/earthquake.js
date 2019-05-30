@@ -12,6 +12,14 @@ export default {
     }
   },
   methods: {
+    /**
+     * 地図を描画する関数
+     * polygonSeriesへのアクセス: 「map.series.values[0]」
+     * FIXME: polygonSeriesへのアクセスクソダサい
+     * @param {String} elementId amChartsを描画するエレメントのID
+     * @param {Object} geodata GeoJSON形式の地図データ amcharts4-geodataとか
+     * @return {Object} am4core.create()で作成したmap
+     */
     setMap: function (elementId, geodata) {
       let map = am4core.create(elementId, am4maps.MapChart)
       map.geodata = geodata
@@ -22,6 +30,12 @@ export default {
       })
       return map
     },
+    /**
+     * 地図にマーカーを設置する関数
+     * @param {Object} map setMap()とかam4core.create()を渡す
+     * @param {Object} json omitJsonData()でパースした値を渡す
+     * @return {Object} MapImageSeries
+     */
     setMarker: function (map, json) {
       // https://www.amcharts.com/docs/v4/chart-types/map/#Image_series
       let imageSeries = map.series.push(new am4maps.MapImageSeries())
@@ -42,6 +56,14 @@ export default {
       imageSeries.data = this.omitJsonData(json)
       return imageSeries
     },
+    /**
+     * mapと連動したスクロールバーを描画する関数
+     * @param {Object} map setMap()の戻り値を渡す
+     * @param {Object} imageSeries setMarker()の戻り値を渡す
+     * @param {Object} json mapに渡したデータと同じものを渡す
+     * @param {String} format amChartsの使用にそったタイムスタンプのフォーマットを指定
+     * @return {Object} XYChart
+     */
     setScrollbar: function (map, imageSeries, json, format = 'HH:mm:ss') {
       let chart = map.chartContainer.createChild(am4charts.XYChart)
       chart.data = this.omitJsonData(json)
@@ -80,9 +102,20 @@ export default {
 
       return chart
     },
+    /**
+     * jsonDataをsetmarker()やsetScrollbar()で使える形に整形する
+     * @param {Object} array jsonData
+     * @return {Object} data
+     */
     omitJsonData: function (array) {
       return array.map(item => (this.dataFormat(item)))
     },
+    /**
+     * jsonDataと各項目の紐付けを行う
+     * omitJsonData()から呼び出される
+     * @param {Object} d jsonDataの子要素
+     * @return {Object} data
+     */
     dataFormat: function (d) {
       return {
         'title': d[8],
@@ -94,6 +127,10 @@ export default {
         'percent': d[9]
       }
     },
+    /**
+     * マグニチュードをマーカーのサイズに変換する
+     * @param {Number} mag マグニチュード
+     */
     circleSize: function (mag) {
       let size = 8
       if (mag < 3) {
@@ -105,6 +142,10 @@ export default {
       }
       return size
     },
+    /**
+     * 深度を色に変換する
+     * @param {int} depth 深度
+     */
     depthColor: function (depth) {
       let color = 'blue'
       if (depth < 30) {
@@ -116,6 +157,11 @@ export default {
       }
       return color
     },
+    /**
+     * Scrollbarのstartの位置から有効なdataの最小Indexを返す
+     * @param {Object} array chart.data
+     * @param {Number} startPoint Scrollbarのstartのポジション
+     */
     dragStartBar: function (array, startPoint) {
       let index = 0
       array.some((d, i) => {
@@ -126,6 +172,11 @@ export default {
       })
       return index
     },
+    /**
+     * Scrollbarのendの位置から有効なdataの最大Indexを返す
+     * @param {Object} array chart.data
+     * @param {Number} endPoint Scrollbarのendのポジション
+     */
     dragEndBar: function (array, endPoint) {
       let index = array.length - 1
       array.some((d, i) => {
