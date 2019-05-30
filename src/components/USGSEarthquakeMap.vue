@@ -15,11 +15,14 @@ import mixin from '@/components/mixin/earthquake'
 export default {
   mixins: [mixin],
   mounted () {
-    axios.get('https://earthquake.usgs.gov/fdsnws/event/1/query.geojson?starttime=2019-04-29%2000:00:00&endtime=2019-05-29%2023:59:59&minmagnitude=5&orderby=time-asc')
+    const url = 'https://earthquake.usgs.gov/fdsnws/event/1/query.geojson' +
+      '?starttime=2019-04-29%2000:00:00' +
+      '&endtime=2019-05-29%2023:59:59' +
+      '&minmagnitude=5' +
+      '&orderby=time-asc'
+    axios.get(url)
       .then(res => {
-        console.log(res.data.features)
         const data = this.addPercent(res.data.features)
-        console.log(data)
         let map = this.setMap('chartdiv', am4geodata)
         let imageSeries = this.setMarker(map, data)
         this.setScrollbar(map, imageSeries, data, 'x')
@@ -36,7 +39,7 @@ export default {
           this.depthColor(d.geometry.coordinates[2])
         ),
         'time': d.properties.time,
-        'percent': null
+        'percent': d.percent
       }
     },
     addPercent: function (json) {
